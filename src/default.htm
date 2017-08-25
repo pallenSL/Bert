@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css"></link>
-    <!-- This is actually the fallback to browser API.  Does nothing if preloaded for electron or openfin -->
-    <script src="https://unpkg.com/containerjs-api-browser@0.0.3/build/dist/containerjs-api.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- This is actually a fallback to the browser API.  It does nothing if preloaded for electron or openfin -->
+    <script src="https://unpkg.com/containerjs-api-browser@0.0.4/build/dist/containerjs-api.js"></script>
 </head>
 
 <body>
@@ -20,28 +21,56 @@
         <li>scale: <span id="displayScale">unknown</span></li>
     </ul>
 
+    <div id="exceptionText">
+    </div>
+
     <script>
         ssf.app.ready()
-            .then(() => {
-                const status = document.getElementById('status')
+        .then(() => {
+            console.log("ready()");
+
+            const status = document.getElementById('status')
+            
+            status.innerText = 'yes';
+
+            const displayId = document.getElementById('displayId')
+            const displayBounds = document.getElementById('displayBounds')
+            const displayPrimary = document.getElementById('displayPrimary')
+            const displayRotation = document.getElementById('displayRotation')
+            const displayScale = document.getElementById('displayScale')
+
+            if (displayId != null) {
+                displayId.innerText = "chickens";
+            }
+
+            ssf.Screen.getDisplays()
+            .then((value) => {
+
+                console.log("getDisplays()");
                 
-                status.innerText = 'yes';
+                if (value == null) {
+                    console.log("no value");
+                }
 
-                const displayId = document.getElementById('displayId')
-                const displayBounds = document.getElementById('displayBounds')
-                const displayPrimary = document.getElementById('displayPrimary')
-                const displayRotation = document.getElementById('displayScale')
+                if (value[0] == null) {
+                    console.log("no value[0]");
+                }
 
-                ssf.Screen.getDisplays().then((value) => {
-                    displayId.innerText = value[0].id;
-                    displayBounds.innerText = value[0].bounds.x + ', ' + value[0].bounds.y + ', ' + value[0].bounds.width + ', ' + value[0].bounds.height;
-                    displayPrimary.innerText = value[0].primary;
-                    displayRotation.innerText = value[0].rotation;
-                    displayScale.innerText = value[0].scaleFactor;
-                });
+                displayId.innerText = value[0].id;
+                displayBounds.innerText = value[0].bounds.x + ', ' + value[0].bounds.y + ', ' + value[0].bounds.width + ', ' + value[0].bounds.height;
+                displayPrimary.innerText = value[0].primary;
+                displayRotation.innerText = value[0].rotation;
+                displayScale.innerText = value[0].scaleFactor;
+            })
+            .catch((ex) => {
+                console.log("catch() - "  + ex);
+                exceptionText.innerText = ex;
             });
-    </script>
-
+        })
+        .catch((ex) => {
+            console.log("catch() - "  + ex);
+            exceptionText.innerText = ex;
+        });
+</script>
 </body>
-
 </html>
