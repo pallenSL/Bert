@@ -1,10 +1,10 @@
 ssf.app.ready()
 .then(() => {
-    const displayId = document.getElementById('displayId')
-    const displayBounds = document.getElementById('displayBounds')
-    const displayPrimary = document.getElementById('displayPrimary')
-    const displayRotation = document.getElementById('displayRotation')
-    const displayScale = document.getElementById('displayScale')
+    const displayId = document.getElementById('displayId');
+    const displayBounds = document.getElementById('displayBounds');
+    const displayPrimary = document.getElementById('displayPrimary');
+    const displayRotation = document.getElementById('displayRotation');
+    const displayScale = document.getElementById('displayScale');
 
     ssf.Screen.getDisplays()
         .then((value) => {
@@ -25,12 +25,12 @@ ssf.app.ready()
             displayRotation.innerText = value[0].rotation;
             displayScale.innerText = value[0].scaleFactor;
         })
-        .catch((ex) => {
-            console.log("catch() - " + ex);
-            exceptionText.innerText = ex;
+        .catch((error) => {
+            console.log(error);
+            exceptionText.innerText = error;
         });
 })
-.catch((ex) => {
-    console.log("catch() - " + ex);
-    exceptionText.innerText = ex;
+.catch((error) => {
+    console.log(error);
+    exceptionText.innerText = error;
 });

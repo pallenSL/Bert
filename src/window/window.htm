@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <!-- This is actually a fallback to the browser API.  It does nothing if preloaded for electron or openfin -->
@@ -7,15 +8,28 @@
 </head>
 
 <body>
+    <a href="/default.htm">Home</a>
     <h5>Window</h5>
 
     <p>Is there anybody there? <span id="ssfStatusId">no</span></p>
 
     <button id="newWindowBtn">New Window</button>
+    <p>win.id <span id="windowId">unknown</span></p>
+
+    <button id="closeWindowBtn">Close</button>
+    <button id="hideWindowBtn">Hide</button>
+    <button id="showWindowBtn">Show</button>
+    <button id="focusWindowBtn">Focus</button>
+    <button id="blurWindowBtn">Blur</button>
+    <button id="maximizeWindowBtn">Maximize</button>
+    <button id="unmaximizeWindowBtn">Unmaximize</button>
+    <button id="minimizeWindowBtn">Minimize</button>
+    <button id="restoreWindowBtn">Restore</button>
 
     <div id="exceptionText">alles klar</div>
-    
+
     <script src="/scripts/status.js"></script>
     <script src="window.js"></script>
 </body>
+
 </html>
