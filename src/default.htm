@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <!-- This is actually a fallback to the browser API.  It does nothing if preloaded for electron or openfin -->
@@ -9,20 +8,11 @@
 
 <body>
     <h5>Home</h5>
-    <p>Is there anybody there? <span id="status">no</span></p>
-
-    <script>
-        ssf.app.ready()
-            .then(() => {
-                console.log("ready()");
-
-                const status = document.getElementById('status')
-
-                status.innerText = 'yes';
-            });
-    </script>
+    <p>Is there anybody there? <span id="ssfStatusId">no</span></p>
 
     <a href="/display/display.htm">Display</a>
-</body>
+    <a href="/window/window.htm">Windah</a>
 
+    <script src="/scripts/status.js"></script>
+</body>
 </html>

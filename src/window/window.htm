@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- This is actually a fallback to the browser API.  It does nothing if preloaded for electron or openfin -->
+    <script src="https://unpkg.com/containerjs-api-browser@0.0.4/build/dist/containerjs-api.js"></script>
+</head>
+
+<body>
+    <h5>Window</h5>
+
+    <p>Is there anybody there? <span id="ssfStatusId">no</span></p>
+
+    <button id="newWindowBtn">New Window</button>
+
+    <div id="exceptionText">alles klar</div>
+    
+    <script>
+        ssf.app.ready()
+            .then(() => {
+                newWindowBtn.onclick = function() 
+                {
+                    console.log("onclick()");
+
+                    const height=400;
+                    const width=600;
+
+                    win = new ssf.Window({
+                        alwaysOnTop: true,
+                        child: true,
+                        center: false,
+                        frame: true,
+                        height,
+                        maximizable: true,
+                        minimizable: true,
+                        name: "bert",
+                        resizable: true,
+                        show: true,
+                        skipTaskbar: false,
+                        width,
+                        shadow: true,
+                        url: ""
+                    });
+                };
+            })
+            .catch((ex) => {
+                        console.log("catch() - " + ex);
+                        exceptionText.innerText = ex;
+            });
+    </script>
+
+    <script src="/scripts/status.js"></script>
+</body>
+</html>
