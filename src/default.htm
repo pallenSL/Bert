@@ -2,75 +2,27 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <!-- This is actually a fallback to the browser API.  It does nothing if preloaded for electron or openfin -->
     <script src="https://unpkg.com/containerjs-api-browser@0.0.4/build/dist/containerjs-api.js"></script>
 </head>
 
 <body>
-    <p>Is there anybody there?
-        <span id="status">no</span>
-    </p>
-
-    <h5>Display</h5>
-    <ul>
-        <li>id: <span id="displayId">unknown</span></li>
-        <li>bounds: <span id="displayBounds">unknown</span></li>
-        <li>primary: <span id="displayPrimary">unknown</span></li>
-        <li>rotation: <span id="displayRotation">unknown</span></li>
-        <li>scale: <span id="displayScale">unknown</span></li>
-    </ul>
-
-    <div id="exceptionText">
-    </div>
+    <h5>Home</h5>
+    <p>Is there anybody there? <span id="status">no</span></p>
 
     <script>
         ssf.app.ready()
-        .then(() => {
-            console.log("ready()");
+            .then(() => {
+                console.log("ready()");
 
-            const status = document.getElementById('status')
-            
-            status.innerText = 'yes';
+                const status = document.getElementById('status')
 
-            const displayId = document.getElementById('displayId')
-            const displayBounds = document.getElementById('displayBounds')
-            const displayPrimary = document.getElementById('displayPrimary')
-            const displayRotation = document.getElementById('displayRotation')
-            const displayScale = document.getElementById('displayScale')
-
-            if (displayId != null) {
-                displayId.innerText = "chickens";
-            }
-
-            ssf.Screen.getDisplays()
-            .then((value) => {
-
-                console.log("getDisplays()");
-                
-                if (value == null) {
-                    console.log("no value");
-                }
-
-                if (value[0] == null) {
-                    console.log("no value[0]");
-                }
-
-                displayId.innerText = value[0].id;
-                displayBounds.innerText = value[0].bounds.x + ', ' + value[0].bounds.y + ', ' + value[0].bounds.width + ', ' + value[0].bounds.height;
-                displayPrimary.innerText = value[0].primary;
-                displayRotation.innerText = value[0].rotation;
-                displayScale.innerText = value[0].scaleFactor;
-            })
-            .catch((ex) => {
-                console.log("catch() - "  + ex);
-                exceptionText.innerText = ex;
+                status.innerText = 'yes';
             });
-        })
-        .catch((ex) => {
-            console.log("catch() - "  + ex);
-            exceptionText.innerText = ex;
-        });
-</script>
+    </script>
+
+    <a href="/display/display.htm">Display</a>
 </body>
+
 </html>
