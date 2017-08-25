@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"></link>
+    <!-- This is actually the fallback to browser API.  Does nothing if preloaded for electron or openfin -->
+    <script src="https://unpkg.com/containerjs-api-browser@0.0.3/build/dist/containerjs-api.js"></script>
+</head>
+
+<body>
+    <p>Is there anybody there?
+        <span id="status">no</span>
+    </p>
+
+    <h5>Display</h5>
+    <ul>
+        <li>id: <span id="displayId">unknown</span></li>
+        <li>bounds: <span id="displayBounds">unknown</span></li>
+        <li>primary: <span id="displayPrimary">unknown</span></li>
+        <li>rotation: <span id="displayRotation">unknown</span></li>
+        <li>scale: <span id="displayScale">unknown</span></li>
+    </ul>
+
+    <script>
+        ssf.app.ready()
+            .then(() => {
+                const status = document.getElementById('status')
+                
+                status.innerText = 'yes';
+
+                const displayId = document.getElementById('displayId')
+                const displayBounds = document.getElementById('displayBounds')
+                const displayPrimary = document.getElementById('displayPrimary')
+                const displayRotation = document.getElementById('displayScale')
+
+                ssf.Screen.getDisplays().then((value) => {
+                    displayId.innerText = value[0].id;
+                    displayBounds.innerText = value[0].bounds.x + ', ' + value[0].bounds.y + ', ' + value[0].bounds.width + ', ' + value[0].bounds.height;
+                    displayPrimary.innerText = value[0].primary;
+                    displayRotation.innerText = value[0].rotation;
+                    displayScale.innerText = value[0].scaleFactor;
+                });
+            });
+    </script>
+
+</body>
+
+</html>
